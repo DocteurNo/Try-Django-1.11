@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>{% block head_title %}MuyPicky.com{% endblock head_title %}</title>
+</head>
+<body>
+	<h1>Hello World</h1>
+	<p>This is <code>{% verbatim %}{{ html_var }}{% endverbatim %}</code> coming through</p>
+	{% if num is not None %}
+		<p>Random number is {{ num }}</p>
+	{% endif %}
+	{% for some_item in some_list %}
+		{% if some_item|divisibleby:"2" %}
+			Even number
+		{% endif %}
+	    {{ some_item }}<br>
+	{% endfor %}
+	<p>Some Item is : {{ some_item }}</p>
+</body>
+</html>
