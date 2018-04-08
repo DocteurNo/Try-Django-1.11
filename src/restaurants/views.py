@@ -16,4 +16,12 @@ def home(request):
 		"num": num,
 		"some_list": some_list
 	}
-	return render(request, "base.html", context)# 1h08 39s
+	return render(request, "home.html", context)
+
+def about(request):
+	context = {}
+	return render(request, "about.html", context)
+
+def contact(request):
+	context = {}
+	return render(request, "contact.html", context)
