@@ -4,6 +4,10 @@ include/
 pip-selfcheck.json
 *.sqlite3
 
+# Exclude Sublime Text project
+*.sublime-project
+*.sublime-workspace
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
