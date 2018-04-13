@@ -8,23 +8,26 @@ from .models import Item
 class HomeView(View):
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated():
-            return render(request, "home.html", {})
+            object_list = Item.objects.filter(public=True).order_by('-timestamp')
+            return render(request, "home.html", {"object_list": object_list})
 
         user = request.user
         is_following_user_ids = [x.user.id for x in user.is_following.all()]
         qs = Item.objects.filter(user__id__in=is_following_user_ids, public=True).order_by("-updated")[:3]
         return render(request, "menus/home-feed.html", {'object_list': qs})
 
+class AllUserRecentItemListView(ListView):
+    template_name = 'home.html'
+    def get_queryset(self):
+        return Item.objects.filter(user__is_active=True)
 
 class ItemListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Item.objects.filter(user=self.request.user)
 
-
 class ItemDetailView(LoginRequiredMixin, DetailView):
     def get_queryset(self):
         return Item.objects.filter(user=self.request.user)
-
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
     template_name = 'form.html'
@@ -47,7 +50,6 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         context = super(ItemCreateView, self).get_context_data(*args, **kwargs)
         context['title'] = 'Create Item'
         return context
-
 
 class ItemUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'menus/detail-update.html'
