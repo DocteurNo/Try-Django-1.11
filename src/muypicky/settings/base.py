@@ -27,6 +27,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'james.bond.agent008@gmail.com'
+EMAIL_HOST_PASSWORD = '060384'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Stanislas Neau <james.bond.agent008@gmail.com>'
+
+ADMINS = (
+    ('You', 'james.bond.agent008@gmail.com'),
+)
+MANAGERS = ADMINS
 
 # Application definition
 
